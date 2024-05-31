@@ -76,7 +76,7 @@ class ModelWrapper:
             eta=1.0,
             num_images_per_prompt=num_images,
             height=height,
-            width=weight,
+            width=width,
             generator=torch.manual_seed(seed),
         ).images
 
