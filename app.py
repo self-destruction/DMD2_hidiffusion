@@ -35,7 +35,7 @@ class ModelWrapper:
         self.pipe.scheduler = LCMScheduler.from_config(self.pipe.scheduler.config)
 
         if args.fast_vae_decode:
-            self.pipe.vae = AutoencoderTiny.from_pretrained(args.vae_repo_name, torch_dtype=DTYPE).to(device)
+            self.pipe.vae = AutoencoderTiny.from_pretrained('madebyollin/taesdxl', torch_dtype=DTYPE).to(device)
 
         apply_hidiffusion(self.pipe)
         # pipe.enable_model_cpu_offload()
@@ -88,10 +88,8 @@ class ModelWrapper:
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--checkpoint_path", type=str)
 parser.add_argument("--model_id", type=str, default="RunDiffusion/Juggernaut-XL-v9")
 parser.add_argument("--precision", type=str, default="float16", choices=["float32", "float16", "bfloat16"])
-parser.add_argument("--conditioning_timestep", type=int, default=999)
 parser.add_argument("--num_step", type=int, default=4, choices=[1, 4])
 parser.add_argument("--repo_name", type=str, default="tianweiy/DMD2")
 parser.add_argument("--ckpt_name", type=str, default="dmd2_sdxl_4step_unet_fp16.bin")
