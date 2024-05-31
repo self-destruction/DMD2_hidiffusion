@@ -64,8 +64,6 @@ class ModelWrapper:
         if seed == -1:
             seed = np.random.randint(0, np.iinfo(np.int32).max)
 
-        generator = torch.manual_seed(seed)
-
         start_time = self._get_time()
 
         images = self.pipe(
