@@ -1,4 +1,4 @@
-from diffusers import StableDiffusionXLPipeline, UNet2DConditionModel, LCMScheduler, AutoencoderTiny, DDIMScheduler
+from diffusers import StableDiffusionXLPipeline, UNet2DConditionModel, LCMScheduler, AutoencoderTiny
 from accelerate import Accelerator
 import random
 import numpy as np
@@ -32,11 +32,7 @@ class ModelWrapper:
             use_safetensors=True,
             add_watermarker=False,
         ).to(device)
-        # self.pipe.scheduler = LCMScheduler.from_config(self.pipe.scheduler.config)
-        self.pipe.scheduler = DDIMScheduler.from_pretrained(
-            args.model_id,
-            subfolder="scheduler"
-        )
+        self.pipe.scheduler = LCMScheduler.from_config(self.pipe.scheduler.config)
 
         if args.fast_vae_decode:
             self.pipe.vae = AutoencoderTiny.from_pretrained('madebyollin/taesdxl', torch_dtype=DTYPE).to(device)
