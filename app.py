@@ -24,7 +24,7 @@ class ModelWrapper:
             DTYPE = torch.float32
         device = accelerator.device
 
-        unet = UNet2DConditionModel.from_pretrained('RunDiffusion/Juggernaut-X-v10', subfolder='unet').to(device, DTYPE)
+        unet = UNet2DConditionModel.from_pretrained('latent-consistency/lcm-sdxl', subfolder='unet').to(device, DTYPE)
         unet.load_state_dict(torch.load(hf_hub_download(args.repo_name, args.ckpt_name), map_location=device))
 
         self.pipe = StableDiffusionXLPipeline.from_pretrained(
